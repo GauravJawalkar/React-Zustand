@@ -1,4 +1,6 @@
 import React from 'react'
+import { useProductStore } from '@/store/ProductStore'
+
 
 interface ProductListType {
     id: number,
@@ -34,6 +36,11 @@ const Products = () => {
             description: "This is a description for product of iphone 12 pro max"
         }
     ]
+
+    const { addToCart }: any = useProductStore((state: any) => ({
+        addToCart: state.addToCart,
+    }));
+
     return (
         <div>
             {
@@ -44,7 +51,7 @@ const Products = () => {
                                 <h1 className='text-3xl'>{name}</h1>
                                 <p className='text-gray-400'>{description}</p>
                             </div>
-                            <button className='bg-gray-800 px-3 py-2 rounded'>Add Product</button>
+                            <button className='bg-gray-800 px-3 py-2 rounded' onClick={() => addToCart({ id, name, description })}>Add Product</button>
                         </div>
                     )
                 })
